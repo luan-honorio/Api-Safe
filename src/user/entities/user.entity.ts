@@ -1,10 +1,11 @@
 import { generateKeySync } from "crypto";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from "typeorm";
+import { Init } from "v8";
 
 @Entity({name : 'User'})
 export class UserEntity {
-    @PrimaryGeneratedColumn({ type: 'int', name: 'id'})
-    id: number;
+    @PrimaryGeneratedColumn({name: 'id'})
+    id:number;
     
     @Column({name : 'idEmpresa', nullable: false})
     idEmpresa: string;

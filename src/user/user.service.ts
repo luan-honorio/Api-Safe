@@ -10,17 +10,17 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  public Users : UserEntity[] = [];
+  
 
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userReposirory: Repository<UserEntity>
+    private readonly userRepository: Repository<UserEntity>
   ){}
 
 
 
  async  create(createUserDto: CreateUserDto):  Promise<UserEntity>{
-  return this.userReposirory.save({
+  return this.userRepository.save({
   ...createUserDto, 
   createdAt : new Date(), 
   })
@@ -30,12 +30,20 @@ export class UserService {
 
 
   async findAll(): Promise<UserEntity[]> {
-    return this.userReposirory.find();
+    return this.userRepository.find();
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number): Promise<UserEntity> {
+    return this.userRepository.findOne({where : {id: id}});
   }
+
+
+  
+  async findEmpresa(idEmpresa: string): Promise<UserEntity> {
+    return this.userRepository.findOne({where : {idEmpresa: idEmpresa}});
+  }
+
+
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
