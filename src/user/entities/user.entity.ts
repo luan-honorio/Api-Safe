@@ -7,8 +7,6 @@ export class UserEntity {
     @PrimaryGeneratedColumn({name: 'id'})
     id:number;
     
-    @Column({name : 'idEmpresa', nullable: false})
-    idEmpresa: string;
 
     @Column({name : 'nome', nullable: false})
     nome : string;
@@ -16,6 +14,12 @@ export class UserEntity {
     @Column({name : 'email', nullable: false})
     email : string;
     
+    @Column({name : 'cpf', nullable: false, unique : true})
+    cpf : string;
+    
+    @Column({name : 'admin', nullable: false})
+    admin : boolean;
+
     @Column({name : 'createdAt', nullable : false})
     createdAt: Date;
 

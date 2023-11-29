@@ -18,7 +18,8 @@ import { dirname } from 'path';
       username : process.env.DB_USERNAME,
       password : process.env.DB_PASSWORD,
       entities : [`${__dirname}/**/*.entity{.js,.ts}`],
-      synchronize : false,
+      dropSchema : false,
+      synchronize :false
     })
     ,UserModule],
   controllers: [AppController],

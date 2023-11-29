@@ -7,6 +7,7 @@ import { UserEntity } from './entities/user.entity';
 import {format} from 'date-fns'
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { runInThisContext } from 'vm';
 
 @Injectable()
 export class UserService {
@@ -39,8 +40,8 @@ export class UserService {
 
 
   
-  async findEmpresa(idEmpresa: string): Promise<UserEntity> {
-    return this.userRepository.findOne({where : {idEmpresa: idEmpresa}});
+  async findEmpresa(cpf: string): Promise<UserEntity> {
+    return this.userRepository.findOne({where : {cpf: cpf}});
   }
 
 
@@ -49,7 +50,10 @@ export class UserService {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number): Promise<UserEntity> {
+   const removeUser = await this.userRepository.findOne({where : {id : id}})
+   if(removeUser){
+    return await this.userRepository.remove(removeUser);
+   }
   }
 }

@@ -24,10 +24,10 @@ export class UserController {
    
   // } 
   
-  @Get('empresa/:empresa')
-  findEmpresa(@Param('empresa') empresa: string) {
+  @Get('empresa/:cpf')
+  findEmpresa(@Param('cpf') cpf: string) {
   
-    return this.userService.findEmpresa(empresa);
+    return this.userService.findEmpresa(cpf);
  
    
   }
@@ -38,7 +38,7 @@ export class UserController {
     return this.userService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
