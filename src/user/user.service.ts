@@ -1,6 +1,6 @@
 
 
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
@@ -46,8 +46,18 @@ export class UserService {
 
 
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+ async update(id: number, updateUserDto: UpdateUserDto): Promise<UserEntity> {
+    const userMenber = await this.userRepository.update(
+      {id : id},
+      updateUserDto,
+      )
+      if (userMenber.affected > 0) {
+        // Se a atualização foi bem-sucedida (afetou mais de 0 registros)
+        return await this.userRepository.findOne({where : {id : id}});
+      } else {
+        // Se o usuário não foi encontrado ou nenhum registro foi afetado
+        throw new HttpException({message : 'Usuário não encontrado editado'}, HttpStatus.BAD_REQUEST);
+      }
   }
 
   async remove(id: number): Promise<UserEntity> {

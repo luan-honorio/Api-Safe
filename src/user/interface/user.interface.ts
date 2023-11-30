@@ -1,9 +1,14 @@
 export interface user {
-    id : number,
-    nome : string,
-    email : string,
-    cpf : string,
+    id : number;
+    nome : string ;
+    sobrenome : string;
+    email : string ;
+    senha : string;
+    setor : string; 
+    contato : string;
+    dataContrato : Date;
+    cpf : string ;
     admin : boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt : Date;
+    updatedAt : Date;
 }

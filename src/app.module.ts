@@ -7,6 +7,7 @@ import {  TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { dirname } from 'path';
+import { tr } from 'date-fns/locale';
 
 @Module({
   imports: [ConfigModule.forRoot({ envFilePath: '.development.env',}),
@@ -19,7 +20,7 @@ import { dirname } from 'path';
       password : process.env.DB_PASSWORD,
       entities : [`${__dirname}/**/*.entity{.js,.ts}`],
       dropSchema : false,
-      synchronize :false
+      synchronize :false,
     })
     ,UserModule],
   controllers: [AppController],

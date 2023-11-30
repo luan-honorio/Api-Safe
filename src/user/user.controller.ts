@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -17,12 +17,6 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: number) {
- 
-  //     return this.userService.findOne(+id);
-   
-  // } 
   
   @Get('empresa/:cpf')
   findEmpresa(@Param('cpf') cpf: string) {
@@ -33,7 +27,7 @@ export class UserController {
   }
  
 
-  @Patch(':id')
+  @Put('update/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }
