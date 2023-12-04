@@ -52,10 +52,10 @@ export class UserService {
       updateUserDto,
       )
       if (userMenber.affected > 0) {
-        // Se a atualização foi bem-sucedida (afetou mais de 0 registros)
+        
         return await this.userRepository.findOne({where : {id : id}});
       } else {
-        // Se o usuário não foi encontrado ou nenhum registro foi afetado
+        
         throw new HttpException({message : 'Usuário não encontrado editado'}, HttpStatus.BAD_REQUEST);
       }
   }
