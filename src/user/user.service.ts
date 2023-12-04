@@ -56,7 +56,7 @@ export class UserService {
         return await this.userRepository.findOne({where : {id : id}});
       } else {
         
-        throw new HttpException({message : 'Usuário não encontrado editado'}, HttpStatus.BAD_REQUEST);
+        throw new HttpException({message : 'Usuário não  editado'}, HttpStatus.BAD_REQUEST);
       }
   }
 
